@@ -1,0 +1,71 @@
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+
+<script>
+var AccessToken = "";
+window.fbAsyncInit = function() {
+    FB.init({
+        appId : '1596131740607282',
+        xfbml : true,
+        version : 'v2.2'
+    });
+    FB.getLoginStatus (function (response){
+            if(response.status == "connected"){
+                AccessToken = response.authResponse.accessToken;
+                console.log(AccessToken);
+            }
+    });
+};
+
+(function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1596131740607282&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script>
+function GetData(){
+    $.ajax({
+        type : "GET",
+        url : "https://graph.facebook.com/v2.2/me?fields=posts&access_token="+AccessToken,
+        async : true,
+        cache : false,
+
+        success : function(r){
+            console.log(r.posts.data[0].story);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown){
+            console.log("error: " + textStatus + "(" + errorThrown + ")");
+        }
+    });
+}
+</script>
+<!--
+<div
+  class="fb-like"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
+
+<div class="fb-activity" data-app-id="1596131740607282" data-site="developers.facebook.com" data-action="likes, recommends" data-colorscheme="light" data-header="true"></div>
+-->
+<div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="true" data-auto-logout-link="true"></div>
+<button onclick="GetData()">test</button>
+
+</body>
