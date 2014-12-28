@@ -1,71 +1,60 @@
+<!DOCTYPE html>
+<html>
 <head>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<meta charset="utf-8"></meta>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script src="my.js"></script>
+	<link rel="stylesheet" href="app.css">
 </head>
 <body>
+	<div class="container" id="container1234">
+		<div class="row">
+			<div id="fb-root"></div>
+			<div class="jumbotron">
+				<h1><small>This is</small> YoDo <small>in MeiChu Hackathon!</small></h1>
+			</div>
+		</div>
+		<div id="loginBtn" class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="true" data-auto-logout-link="true">
+		</div>
+		<br><br>
+		<div class="row">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title" align="center">Store memories with my best friends</h3>
+				</div>
+				<div class="panel-body">
+					<div id="gData" align="center"><button onclick="getFriendList()" type="button" class="btn btn-primary">Analyze</button></div>
+					<div class="col-md-5" id="black-list">
+					</div>
+					<div class="col-md-2">
+						<center style="position:relative">
+						<div>
+						<i class="glyphicon glyphicon-resize-horizontal" style="font-size:50px" align="center"></i>
+						</div>
+						<div>
+						<button class="btn btn-default" onclick="generatePhotos()" align="center"> Share! </button>
+						</div>
+						</center>
 
-<script>
-var AccessToken = "";
-window.fbAsyncInit = function() {
-    FB.init({
-        appId : '1596131740607282',
-        xfbml : true,
-        version : 'v2.2'
-    });
-    FB.getLoginStatus (function (response){
-            if(response.status == "connected"){
-                AccessToken = response.authResponse.accessToken;
-                console.log(AccessToken);
-            }
-    });
-};
-
-(function(d, s, id){
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1596131740607282&version=v2.0";
-    fjs.parentNode.insertBefore(js, fjs);
-
-}(document, 'script', 'facebook-jssdk'));</script>
-
-<script>
-function GetData(){
-    $.ajax({
-        type : "GET",
-        url : "https://graph.facebook.com/v2.2/me?fields=posts&access_token="+AccessToken,
-        async : true,
-        cache : false,
-
-        success : function(r){
-            console.log(r.posts.data[0].story);
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown){
-            console.log("error: " + textStatus + "(" + errorThrown + ")");
-        }
-    });
-}
-</script>
-<!--
-<div
-  class="fb-like"
-  data-share="true"
-  data-width="450"
-  data-show-faces="true">
-</div>
-
-<div class="fb-activity" data-app-id="1596131740607282" data-site="developers.facebook.com" data-action="likes, recommends" data-colorscheme="light" data-header="true"></div>
--->
-<div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="true" data-auto-logout-link="true"></div>
-<button onclick="GetData()">test</button>
+					</div>
+					<div class="col-md-5" id="white-list">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+		</div>
+	</div>
 
 </body>
+</html>
